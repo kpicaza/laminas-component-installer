@@ -34,7 +34,9 @@
         "laminas/laminas-coding-standard": "~1.0.0",
         "malukenho/docheader": "^0.1.6",
         "mikey179/vfsstream": "^1.6.7",
-        "phpunit/phpunit": "^7.5.15 || ^8.3.4"
+        "phpunit/phpunit": "^7.5.15 || ^8.3.4",
+        "psalm/plugin-phpunit": "^0.10 || ^0.13",
+        "vimeo/psalm": "^3.18 || ^4.0"
     },
     "autoload": {
         "psr-4": {
@@ -49,6 +51,7 @@
     "scripts": {
         "check": [
             "@license-check",
+            "@static-analysis",
             "@cs-check",
             "@test"
         ],
@@ -56,7 +59,8 @@
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
-        "license-check": "docheader check src/"
+        "license-check": "docheader check src/",
+        "static-analysis": "psalm --shepherd --stats"
     },
     "replace": {
         "zendframework/zend-component-installer": "^2.1.2"
