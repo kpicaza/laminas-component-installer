@@ -56,9 +56,11 @@ class Collection implements
      * Factory method
      *
      * @param array|Traversable
+     * @param (mixed|string)[] $items
+     *
      * @return static
      */
-    public static function create($items)
+    public static function create(array $items)
     {
         return new static($items);
     }

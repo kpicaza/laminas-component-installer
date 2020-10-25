@@ -396,9 +396,12 @@ abstract class AbstractInjector implements InjectorInterface
      *
      * @var string $package Package name
      * @var string $config
+     *
      * @return bool
+     *
+     * @param false|string $config
      */
-    protected function isRegisteredInConfig($package, $config)
+    protected function isRegisteredInConfig(string $package, $config)
     {
         return preg_match(sprintf($this->isRegisteredPattern, preg_quote($package, '/')), $config)
             || preg_match(sprintf($this->isRegisteredPattern, preg_quote(addslashes($package), '/')), $config);

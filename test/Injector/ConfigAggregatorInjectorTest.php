@@ -27,6 +27,9 @@ class ConfigAggregatorInjectorTest extends AbstractInjectorTestCase
         ConfigAggregatorInjector::TYPE_CONFIG_PROVIDER,
     ];
 
+    /**
+     * @param false|string $contents
+     */
     public function convertToShortArraySyntax($contents)
     {
         return preg_replace('/array\(([^)]+)\)/s', '[$1]', $contents);

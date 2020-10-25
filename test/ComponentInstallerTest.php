@@ -106,7 +106,10 @@ class ComponentInstallerTest extends TestCase
         $this->composer->getInstallationManager()->willReturn($this->installationManager->reveal());
     }
 
-    public static function assertPrompt($argument, $packageName = null)
+    /**
+     * @param null|string $packageName
+     */
+    public static function assertPrompt($argument, ?string $packageName = null)
     {
         if (! is_string($argument)) {
             return false;
@@ -138,7 +141,10 @@ class ComponentInstallerTest extends TestCase
         return true;
     }
 
-    public function createApplicationConfig($contents = null)
+    /**
+     * @param null|string $contents
+     */
+    public function createApplicationConfig(?string $contents = null)
     {
         $contents = $contents ?: '<' . "?php\nreturn [\n    'modules' => [\n    ]\n];";
         vfsStream::newFile('config/application.config.php')
@@ -146,7 +152,7 @@ class ComponentInstallerTest extends TestCase
             ->setContent($contents);
     }
 
-    protected function createModuleClass($path, $contents)
+    protected function createModuleClass(string $path, string $contents)
     {
         vfsStream::newDirectory(dirname($path))
             ->at($this->projectRoot);
@@ -957,7 +963,7 @@ CONTENT
         }), 1)->willReturn(1);
 
         $io = $this->io;
-        $askValidator = function ($argument) {
+        $askValidator = function ($argument): bool {
             if (! is_string($argument)) {
                     return false;
             }
@@ -1659,7 +1665,7 @@ CONTENT
         ], $dependencies);
     }
 
-    public function setUpModuleDependencies($path)
+    public function setUpModuleDependencies(string $path)
     {
         $this->createModuleClass(
             $path . '/src/Psr0Too/DoesNotExist/Module.php',
@@ -1944,9 +1950,10 @@ CONFIG;
     }
 
     /**
-     * @param ObjectProphecy|PackageEvent $event
+     * @param ObjectProphecy $event
      * @param string $packageName
-     * @return ObjectProphecy
+     *
+     * @return void
      */
     private function prepareEventForPackageProviderDetection(ObjectProphecy $event, string $packageName): void
     {

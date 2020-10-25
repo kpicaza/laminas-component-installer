@@ -66,7 +66,7 @@ class ConfigDiscoveryTest extends TestCase
             ->setContent('<' . "?php\nreturn [\n    'modules' => [\n    ]\n];");
     }
 
-    public function createDevelopmentConfig($dist = true)
+    public function createDevelopmentConfig(bool $dist = true)
     {
         $configFileName = 'config/development.config.php' . ($dist ? '.dist' : '');
         vfsStream::newFile($configFileName)
@@ -114,7 +114,7 @@ class ConfigDiscoveryTest extends TestCase
         }
     }
 
-    public function assertOptionsContainsInjector($injectorType, Collection $options)
+    public function assertOptionsContainsInjector(string $injectorType, Collection $options)
     {
         foreach ($options as $option) {
             if (! $option instanceof ConfigOption) {
@@ -135,7 +135,7 @@ class ConfigDiscoveryTest extends TestCase
         ));
     }
 
-    public function assertOptionsContainsInjectorInChain($injectorType, Collection $options)
+    public function assertOptionsContainsInjectorInChain(string $injectorType, Collection $options)
     {
         $chain = $this->assertOptionsContainsInjector(Injector\ConfigInjectorChain::class, $options);
 
