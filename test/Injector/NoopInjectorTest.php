@@ -24,7 +24,7 @@ class NoopInjectorTest extends TestCase
     /**
      * @dataProvider packageTypes
      *
-     * @param string $type
+     * @param int $type
      *
      * @return void
      */
@@ -55,7 +55,7 @@ class NoopInjectorTest extends TestCase
     /**
      * @dataProvider packageTypes
      *
-     * @param string $type
+     * @param int $type
      *
      * @return void
      */

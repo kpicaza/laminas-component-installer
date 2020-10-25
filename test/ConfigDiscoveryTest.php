@@ -137,6 +137,7 @@ class ConfigDiscoveryTest extends TestCase
 
     public function assertOptionsContainsInjectorInChain(string $injectorType, Collection $options): void
     {
+        /** @var Injector\ConfigInjectorChain $chain */
         $chain = $this->assertOptionsContainsInjector(Injector\ConfigInjectorChain::class, $options);
 
         foreach ($chain->getCollection() as $injector) {
@@ -183,9 +184,7 @@ class ConfigDiscoveryTest extends TestCase
     }
 
     /**
-     * @return (\Laminas\ComponentInstaller\Injector\ApplicationConfigInjector::class|\Laminas\ComponentInstaller\Injector\ConfigAggregatorInjector::class|\Laminas\ComponentInstaller\Injector\DevelopmentConfigInjector::class|\Laminas\ComponentInstaller\Injector\DevelopmentWorkConfigInjector::class|\Laminas\ComponentInstaller\Injector\MezzioConfigInjector::class|\Laminas\ComponentInstaller\Injector\ModulesConfigInjector::class|bool|int|string)[][]
-     *
-     * @psalm-return array{0: array{seedMethod: string, type: int, expected: string, chain: false}, 1: array{seedMethod: string, type: int, expected: string, chain: false}, 2: array{seedMethod: string, type: int, expected: string, chain: true}, 3: array{seedMethod: string, type: int, expected: string, chain: true}, 4: array{seedMethod: string, type: int, expected: string, chain: true}, 5: array{seedMethod: string, type: int, expected: string, chain: true}, 6: array{seedMethod: string, type: int, expected: string, chain: true}, 7: array{seedMethod: string, type: int, expected: string, chain: true}, 8: array{seedMethod: string, type: int, expected: string, chain: true}, 9: array{seedMethod: string, type: int, expected: string, chain: true}, 10: array{seedMethod: string, type: int, expected: string, chain: false}, 11: array{seedMethod: string, type: int, expected: string, chain: false}}
+     * @return array<array{seedMethod:string,type:int,expected:string,chain:bool}>
      */
     public function configFileSubset(): array
     {
@@ -269,17 +268,17 @@ class ConfigDiscoveryTest extends TestCase
      * @dataProvider configFileSubset
      *
      * @param string $seedMethod
-     * @param string $type
+     * @param int $type
      * @param string $expected
      * @param bool $chain
      *
      * @return void
      */
     public function testGetAvailableConfigOptionsCanReturnsSubsetOfOptionsBaseOnPackageType(
-        $seedMethod,
-        $type,
-        $expected,
-        $chain
+        string $seedMethod,
+        int $type,
+        string $expected,
+        bool $chain
     ): void {
         $this->{$seedMethod}();
         $options = $this->discovery->getAvailableConfigOptions(new Collection([$type]), vfsStream::url('project'));

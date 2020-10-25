@@ -1608,9 +1608,7 @@ CONTENT
     }
 
     /**
-     * @return (string|string[][])[][]
-     *
-     * @psalm-return array{0: array{0: string, 1: array{'BadlyFormatted\\Application': array{0: string}}}, 1: array{0: string, 1: array{MyNamespace: array{0: string}}}, 2: array{0: string, 1: array{'LongArray\\Application': array{0: string, 1: string}}}, 3: array{0: string, 1: array<empty, empty>}, 4: array{0: string, 1: array<empty, empty>}}
+     * @return array<array<string|mixed>>
      */
     public function moduleClass(): array
     {
@@ -1626,8 +1624,8 @@ CONTENT
     /**
      * @dataProvider moduleClass
      *
-     * @param string $file
-     * @param array $result
+     * @param string|mixed $file
+     * @param array|mixed $result
      *
      * @return void
      */
