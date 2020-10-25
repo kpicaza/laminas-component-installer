@@ -33,7 +33,7 @@ class ConfigDiscovery
     /**
      * Map of config files to injectors
      *
-     * @var string[]
+     * @var array<string, string|array>
      */
     private $injectors = [
         'config/application.config.php' => Injector\ApplicationConfigInjector::class,

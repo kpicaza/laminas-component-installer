@@ -30,6 +30,11 @@ class MezzioConfigInjectorTest extends AbstractInjectorTestCase
      */
     public function convertToShortArraySyntax($contents)
     {
+        if (false === $contents) {
+            return false;
+        }
+
+
         return preg_replace('/array\(([^)]+)\)/s', '[$1]', $contents);
     }
 

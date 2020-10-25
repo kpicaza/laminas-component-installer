@@ -55,7 +55,6 @@ class Collection implements
     /**
      * Factory method
      *
-     * @param array|Traversable
      * @param (mixed|string)[] $items
      *
      * @return static

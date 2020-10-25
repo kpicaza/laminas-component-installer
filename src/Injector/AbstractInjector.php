@@ -167,6 +167,10 @@ abstract class AbstractInjector implements InjectorInterface
     public function isRegistered($package)
     {
         $config = file_get_contents($this->configFile);
+        if (false === $config) {
+            return false;
+        }
+
         return $this->isRegisteredInConfig($package, $config);
     }
 
@@ -398,8 +402,6 @@ abstract class AbstractInjector implements InjectorInterface
      * @var string $config
      *
      * @return bool
-     *
-     * @param false|string $config
      */
     protected function isRegisteredInConfig(string $package, $config)
     {
