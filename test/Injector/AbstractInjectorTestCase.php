@@ -49,13 +49,15 @@ abstract class AbstractInjectorTestCase extends TestCase
      *
      * @param string $type
      * @param bool $expected
+     *
+     * @return void
      */
-    public function testRegistersTypesReturnsExpectedBooleanBasedOnType($type, $expected)
+    public function testRegistersTypesReturnsExpectedBooleanBasedOnType($type, $expected): void
     {
         $this->assertSame($expected, $this->injector->registersType($type));
     }
 
-    public function testGetTypesAllowedReturnsListOfAllExpectedTypes()
+    public function testGetTypesAllowedReturnsListOfAllExpectedTypes(): void
     {
         $this->assertEquals($this->injectorTypesAllowed, $this->injector->getTypesAllowed());
     }
@@ -68,8 +70,10 @@ abstract class AbstractInjectorTestCase extends TestCase
      * @param string $type
      * @param string $initialContents
      * @param string $expectedContents
+     *
+     * @return void
      */
-    public function testInjectAddsPackageToModulesListInAppropriateLocation($type, $initialContents, $expectedContents)
+    public function testInjectAddsPackageToModulesListInAppropriateLocation($type, $initialContents, $expectedContents): void
     {
         vfsStream::newFile($this->configFile)
             ->at($this->configDir)
@@ -89,8 +93,10 @@ abstract class AbstractInjectorTestCase extends TestCase
      *
      * @param string $contents
      * @param string $type
+     *
+     * @return void
      */
-    public function testInjectDoesNotModifyContentsIfPackageIsAlreadyRegistered($contents, $type)
+    public function testInjectDoesNotModifyContentsIfPackageIsAlreadyRegistered($contents, $type): void
     {
         vfsStream::newFile($this->configFile)
             ->at($this->configDir)
@@ -109,8 +115,10 @@ abstract class AbstractInjectorTestCase extends TestCase
      * @dataProvider emptyConfiguration
      *
      * @param string $contents
+     *
+     * @return void
      */
-    public function testRemoveDoesNothingIfPackageIsNotInConfigFile($contents)
+    public function testRemoveDoesNothingIfPackageIsNotInConfigFile($contents): void
     {
         vfsStream::newFile($this->configFile)
             ->at($this->configDir)
@@ -127,8 +135,10 @@ abstract class AbstractInjectorTestCase extends TestCase
      *
      * @param string $initialContents
      * @param string $expectedContents
+     *
+     * @return void
      */
-    public function testRemoveRemovesPackageFromConfigurationWhenFound($initialContents, $expectedContents)
+    public function testRemoveRemovesPackageFromConfigurationWhenFound($initialContents, $expectedContents): void
     {
         vfsStream::newFile($this->configFile)
             ->at($this->configDir)

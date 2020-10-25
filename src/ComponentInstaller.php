@@ -535,6 +535,8 @@ class ComponentInstaller implements
      * return void
      *
      * @todo Will need to store selection in filesystem and remove when all packages are complete
+     *
+     * @return void
      */
     private function promptToRememberOption(Injector\InjectorInterface $injector, $packageType)
     {
@@ -924,11 +926,11 @@ class ComponentInstaller implements
         return true;
     }
 
-    public function deactivate(Composer $composer, IOInterface $io)
+    public function deactivate(Composer $composer, IOInterface $io): void
     {
     }
 
-    public function uninstall(Composer $composer, IOInterface $io)
+    public function uninstall(Composer $composer, IOInterface $io): void
     {
     }
 }

@@ -29,12 +29,12 @@ class ApplicationConfigTest extends TestCase
         );
     }
 
-    public function testAbsenceOfFileReturnsFalseOnLocate()
+    public function testAbsenceOfFileReturnsFalseOnLocate(): void
     {
         $this->assertFalse($this->locator->locate());
     }
 
-    public function testLocateReturnsFalseWhenFileDoesNotHaveExpectedContents()
+    public function testLocateReturnsFalseWhenFileDoesNotHaveExpectedContents(): void
     {
         vfsStream::newFile('config/application.config.php')
             ->at($this->configDir)
@@ -42,7 +42,12 @@ class ApplicationConfigTest extends TestCase
         $this->assertFalse($this->locator->locate());
     }
 
-    public function validApplicationConfigContents()
+    /**
+     * @return string[][]
+     *
+     * @psalm-return array{long-array: array{0: string}, short-array: array{0: string}}
+     */
+    public function validApplicationConfigContents(): array
     {
         return [
             'long-array'  => ['<' . "?php\nreturn array(\n    'modules' => array(\n    )\n);"],
@@ -54,8 +59,10 @@ class ApplicationConfigTest extends TestCase
      * @dataProvider validApplicationConfigContents
      *
      * @param string $contents
+     *
+     * @return void
      */
-    public function testLocateReturnsTrueWhenFileExistsAndHasExpectedContent($contents)
+    public function testLocateReturnsTrueWhenFileExistsAndHasExpectedContent($contents): void
     {
         vfsStream::newFile('config/application.config.php')
             ->at($this->configDir)

@@ -108,8 +108,10 @@ class ComponentInstallerTest extends TestCase
 
     /**
      * @param null|string $packageName
+     *
+     * @return bool
      */
-    public static function assertPrompt($argument, ?string $packageName = null)
+    public static function assertPrompt($argument, ?string $packageName = null): bool
     {
         if (! is_string($argument)) {
             return false;
@@ -143,8 +145,10 @@ class ComponentInstallerTest extends TestCase
 
     /**
      * @param null|string $contents
+     *
+     * @return void
      */
-    public function createApplicationConfig(?string $contents = null)
+    public function createApplicationConfig(?string $contents = null): void
     {
         $contents = $contents ?: '<' . "?php\nreturn [\n    'modules' => [\n    ]\n];";
         vfsStream::newFile('config/application.config.php')
@@ -152,7 +156,7 @@ class ComponentInstallerTest extends TestCase
             ->setContent($contents);
     }
 
-    protected function createModuleClass(string $path, string $contents)
+    protected function createModuleClass(string $path, string $contents): void
     {
         vfsStream::newDirectory(dirname($path))
             ->at($this->projectRoot);
@@ -162,7 +166,7 @@ class ComponentInstallerTest extends TestCase
             ->setContent($contents);
     }
 
-    public function testMissingDependency()
+    public function testMissingDependency(): void
     {
         $installPath = 'install/path';
         $this->createApplicationConfig(
@@ -236,7 +240,12 @@ CONTENT
         $this->assertNull($this->installer->onPostPackageInstall($event->reveal()));
     }
 
-    public function dependency()
+    /**
+     * @return (string|string[])[][]
+     *
+     * @psalm-return array{one-dependency-on-top-psr-0: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string}, one-dependency-on-bottom-psr-0: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string}, no-dependencies-psr-0: array{0: string, 1: array{0: string}, 2: array<empty, empty>, 3: array{0: string, 1: string}, 4: string}, two-dependencies-psr-0: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string}, two-dependencies-in-reverse-order-psr-0: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string}, two-dependencies-with-more-packages-psr-0: array{0: string, 1: array{0: string, 1: string, 2: string, 3: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string, 4: string}, 4: string}, one-dependency-on-top-psr-4: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string}, one-dependency-on-bottom-psr-4: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string}, no-dependencies-psr-4: array{0: string, 1: array{0: string}, 2: array<empty, empty>, 3: array{0: string, 1: string}, 4: string}, two-dependencies-psr-4: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string}, two-dependencies-in-reverse-order-psr-4: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string}, two-dependencies-with-more-packages-psr-4: array{0: string, 1: array{0: string, 1: string, 2: string, 3: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string, 4: string}, 4: string}, one-dependency-on-top-classmap: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string, 5: string}, one-dependency-on-bottom-classmap: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string, 5: string}, no-dependencies-classmap: array{0: string, 1: array{0: string}, 2: array<empty, empty>, 3: array{0: string, 1: string}, 4: string, 5: string}, two-dependencies-classmap: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string, 5: string}, two-dependencies-in-reverse-order-classmap: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string, 5: string}, two-dependencies-with-more-packages-classmap: array{0: string, 1: array{0: string, 1: string, 2: string, 3: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string, 4: string}, 4: string, 5: string}, one-dependency-on-top-classmap-file: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string, 5: string}, one-dependency-on-bottom-classmap-file: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string, 5: string}, no-dependencies-classmap-file: array{0: string, 1: array{0: string}, 2: array<empty, empty>, 3: array{0: string, 1: string}, 4: string, 5: string}, two-dependencies-classmap-file: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string, 5: string}, two-dependencies-in-reverse-order-classmap-file: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string, 5: string}, two-dependencies-with-more-packages-classmap-file: array{0: string, 1: array{0: string, 1: string, 2: string, 3: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string, 4: string}, 4: string, 5: string}, one-dependency-on-top-files: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string}, one-dependency-on-bottom-files: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string}, no-dependencies-files: array{0: string, 1: array{0: string}, 2: array<empty, empty>, 3: array{0: string, 1: string}, 4: string}, two-dependencies-files: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string}, two-dependencies-in-reverse-order-files: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string}, two-dependencies-with-more-packages-files: array{0: string, 1: array{0: string, 1: string, 2: string, 3: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string, 4: string}, 4: string}}
+     */
+    public function dependency(): array
     {
         return [
             // 'description' => [
@@ -485,6 +494,8 @@ CONTENT
      * @param array $result
      * @param string $autoloading classmap|files|psr-0|psr-4
      * @param null|string $autoloadPath
+     *
+     * @return void
      */
     public function testInjectModuleWithDependencies(
         $packageName,
@@ -493,7 +504,7 @@ CONTENT
         array $result,
         $autoloading,
         $autoloadPath = null
-    ) {
+    ): void {
         $installPath = 'install/path';
         $modules = "\n        '" . implode("',\n        '", $enabledModules) . "',";
         $this->createApplicationConfig(
@@ -590,7 +601,12 @@ CONTENT
         $this->assertEquals($result, $modules);
     }
 
-    public function modules()
+    /**
+     * @return string[][][]
+     *
+     * @psalm-return array{two-application-modules: array{0: array{0: string, 1: string}, 1: array{0: string, 1: string}, 2: array{0: string, 1: string, 2: string}}, with-some-component: array{0: array{0: string}, 1: array{0: string, 1: string}, 2: array{0: string, 1: string, 2: string}}, two-application-modules-with-some-component: array{0: array{0: string, 1: string}, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string, 2: string, 3: string}}, two-application-modules-with-some-component-another-order: array{0: array{0: string, 1: string}, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string, 2: string, 3: string}}, component-between-application-modules: array{0: array{0: string, 1: string}, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string, 2: string, 3: string}}, no-application-modules: array{0: array<empty, empty>, 1: array{0: string}, 2: array{0: string, 1: string}}}
+     */
+    public function modules(): array
     {
         return [
             // 'description' => [
@@ -637,8 +653,10 @@ CONTENT
      * @param array $availableModules
      * @param array $enabledModules
      * @param array $result
+     *
+     * @return void
      */
-    public function testModuleBeforeApplicationModules(array $availableModules, array $enabledModules, array $result)
+    public function testModuleBeforeApplicationModules(array $availableModules, array $enabledModules, array $result): void
     {
         $modulePath = vfsStream::newDirectory('module')->at($this->projectRoot);
         foreach ($availableModules as $module) {
@@ -692,7 +710,7 @@ CONTENT
         $this->assertEquals($result, $modules);
     }
 
-    public function testSubscribesToExpectedEvents()
+    public function testSubscribesToExpectedEvents(): void
     {
         $this->assertEquals([
             'post-package-install'   => 'onPostPackageInstall',
@@ -700,7 +718,7 @@ CONTENT
         ], $this->installer->getSubscribedEvents());
     }
 
-    public function testOnPostPackageInstallReturnsEarlyIfEventIsNotInDevMode()
+    public function testOnPostPackageInstallReturnsEarlyIfEventIsNotInDevMode(): void
     {
         $event = $this->prophesize(PackageEvent::class);
         $event->isDevMode()->willReturn(false);
@@ -709,7 +727,7 @@ CONTENT
         $this->assertNull($this->installer->onPostPackageInstall($event->reveal()));
     }
 
-    public function testPostPackageInstallDoesNothingIfComposerExtraIsEmpty()
+    public function testPostPackageInstallDoesNothingIfComposerExtraIsEmpty(): void
     {
         $package = $this->prophesize(PackageInterface::class);
         $package->getName()->willReturn('some/component');
@@ -725,7 +743,7 @@ CONTENT
         $this->assertNull($this->installer->onPostPackageInstall($event->reveal()));
     }
 
-    public function testOnPostPackageInstallReturnsEarlyIfApplicationConfigIsMissing()
+    public function testOnPostPackageInstallReturnsEarlyIfApplicationConfigIsMissing(): void
     {
         $package = $this->prophesize(PackageInterface::class);
         $package->getName()->willReturn('some/component');
@@ -745,7 +763,7 @@ CONTENT
         $this->assertNull($this->installer->onPostPackageInstall($event->reveal()));
     }
 
-    public function testPostPackageInstallDoesNothingIfLaminasExtraSectionDoesNotContainComponentOrModule()
+    public function testPostPackageInstallDoesNothingIfLaminasExtraSectionDoesNotContainComponentOrModule(): void
     {
         $package = $this->prophesize(PackageInterface::class);
         $package->getName()->willReturn('some/component');
@@ -761,7 +779,7 @@ CONTENT
         $this->assertNull($this->installer->onPostPackageInstall($event->reveal()));
     }
 
-    public function testOnPostPackageInstallDoesNotPromptIfPackageIsAlreadyInConfiguration()
+    public function testOnPostPackageInstallDoesNotPromptIfPackageIsAlreadyInConfiguration(): void
     {
         $this->createApplicationConfig(
             '<' . "?php\nreturn [\n    'modules' => [\n        'Some\Component',\n    ]\n];"
@@ -791,7 +809,7 @@ CONTENT
         $this->assertStringContainsString("'Some\Component'", $config);
     }
 
-    public function testOnPostPackageInstallDoesNotPromptForWhitelistedPackages()
+    public function testOnPostPackageInstallDoesNotPromptForWhitelistedPackages(): void
     {
         $this->createApplicationConfig();
 
@@ -826,7 +844,7 @@ CONTENT
         $this->assertStringContainsString("'Some\Component'", $config);
     }
 
-    public function testOnPostPackageInstallPromptsForConfigOptions()
+    public function testOnPostPackageInstallPromptsForConfigOptions(): void
     {
         $this->createApplicationConfig();
 
@@ -891,7 +909,7 @@ CONTENT
         $this->assertStringContainsString("'Some\Component'", $config);
     }
 
-    public function testOnPostPackageInstallPromptsForConfigOptionsWhenDefinedAsArrays()
+    public function testOnPostPackageInstallPromptsForConfigOptionsWhenDefinedAsArrays(): void
     {
         $this->createApplicationConfig();
 
@@ -996,7 +1014,7 @@ CONTENT
         $this->assertStringContainsString("'Other\Component'", $config);
     }
 
-    public function testMultipleInvocationsOfOnPostPackageInstallCanPromptMultipleTimes()
+    public function testMultipleInvocationsOfOnPostPackageInstallCanPromptMultipleTimes(): void
     {
         // Do a first pass, with an initial package
         $this->createApplicationConfig();
@@ -1120,7 +1138,7 @@ CONTENT
         $this->assertStringContainsString("'Other\Component'", $config);
     }
 
-    public function testMultipleInvocationsOfOnPostPackageInstallCanReuseOptions()
+    public function testMultipleInvocationsOfOnPostPackageInstallCanReuseOptions(): void
     {
         // Do a first pass, with an initial package
         $this->createApplicationConfig();
@@ -1210,7 +1228,7 @@ CONTENT
         $this->assertStringContainsString("'Other\Component'", $config);
     }
 
-    public function testOnPostPackageUninstallReturnsEarlyIfEventIsNotInDevMode()
+    public function testOnPostPackageUninstallReturnsEarlyIfEventIsNotInDevMode(): void
     {
         $event = $this->prophesize(PackageEvent::class);
         $event->isDevMode()->willReturn(false);
@@ -1219,7 +1237,7 @@ CONTENT
         $this->assertNull($this->installer->onPostPackageUninstall($event->reveal()));
     }
 
-    public function testOnPostPackageUninstallReturnsEarlyIfNoRelevantConfigFilesAreFound()
+    public function testOnPostPackageUninstallReturnsEarlyIfNoRelevantConfigFilesAreFound(): void
     {
         $event = $this->prophesize(PackageEvent::class);
         $event->isDevMode()->willReturn(true);
@@ -1228,7 +1246,7 @@ CONTENT
         $this->assertNull($this->installer->onPostPackageUninstall($event->reveal()));
     }
 
-    public function testOnPostPackageUninstallRemovesPackageFromConfiguration()
+    public function testOnPostPackageUninstallRemovesPackageFromConfiguration(): void
     {
         $this->createApplicationConfig(
             '<' . "?php\nreturn [\n    'modules' => [\n        'Some\Component',\n    ]\n];"
@@ -1267,7 +1285,7 @@ CONTENT
         $this->assertNotContains('Some\Component', $config);
     }
 
-    public function testOnPostPackageUninstallCanRemovePackageArraysFromConfiguration()
+    public function testOnPostPackageUninstallCanRemovePackageArraysFromConfiguration(): void
     {
         $this->createApplicationConfig(
             '<' . "?php\nreturn [\n    'modules' => [\n        'Some\Component',\n    'Other\Component',\n    ]\n];"
@@ -1315,7 +1333,7 @@ CONTENT
         $this->assertNotContains('Other\Component', $config);
     }
 
-    public function testModuleIsAppended()
+    public function testModuleIsAppended(): void
     {
         $this->createApplicationConfig(
             '<' . "?php\nreturn [\n    'modules' => [\n        'Some\Component',\n    ]\n];"
@@ -1387,7 +1405,7 @@ CONTENT
         ], $modules);
     }
 
-    public function testAppendModuleAndPrependComponent()
+    public function testAppendModuleAndPrependComponent(): void
     {
         $this->createApplicationConfig(
             '<' . "?php\nreturn [\n    'modules' => [\n        'SomeApplication',\n    ]\n];"
@@ -1487,7 +1505,7 @@ CONTENT
         ], $modules);
     }
 
-    public function testPrependComponentAndAppendModule()
+    public function testPrependComponentAndAppendModule(): void
     {
         $this->createApplicationConfig(
             '<' . "?php\nreturn [\n    'modules' => [\n        'SomeApplication',\n    ]\n];"
@@ -1589,7 +1607,12 @@ CONTENT
         ], $modules);
     }
 
-    public function moduleClass()
+    /**
+     * @return (string|string[][])[][]
+     *
+     * @psalm-return array{0: array{0: string, 1: array{'BadlyFormatted\\Application': array{0: string}}}, 1: array{0: string, 1: array{MyNamespace: array{0: string}}}, 2: array{0: string, 1: array{'LongArray\\Application': array{0: string, 1: string}}}, 3: array{0: string, 1: array<empty, empty>}, 4: array{0: string, 1: array<empty, empty>}}
+     */
+    public function moduleClass(): array
     {
         return [
             [__DIR__ . '/TestAsset/ModuleBadlyFormatted.php', ['BadlyFormatted\Application' => ['Dependency1']]],
@@ -1605,8 +1628,10 @@ CONTENT
      *
      * @param string $file
      * @param array $result
+     *
+     * @return void
      */
-    public function testGetModuleDependenciesFromModuleClass($file, $result)
+    public function testGetModuleDependenciesFromModuleClass($file, $result): void
     {
         $r = new ReflectionObject($this->installer);
         $rm = $r->getMethod('getModuleDependencies');
@@ -1617,7 +1642,7 @@ CONTENT
         $this->assertEquals($result, $dependencies);
     }
 
-    public function testGetModuleClassesDependenciesHandlesAutoloadersWithMultiplePathsMappedToSameNamespace()
+    public function testGetModuleClassesDependenciesHandlesAutoloadersWithMultiplePathsMappedToSameNamespace(): void
     {
         $installPath = 'install/path';
         $this->setUpModuleDependencies($installPath);
@@ -1665,7 +1690,7 @@ CONTENT
         ], $dependencies);
     }
 
-    public function setUpModuleDependencies(string $path)
+    public function setUpModuleDependencies(string $path): void
     {
         $this->createModuleClass(
             $path . '/src/Psr0Too/DoesNotExist/Module.php',
@@ -1739,8 +1764,10 @@ CONTENT
      * @param string $configContents
      * @param array $configNames
      * @param string $expectedName
+     *
+     * @return void
      */
-    public function testUninstallMessageWithDifferentInjectors($configContents, array $configNames, $expectedName)
+    public function testUninstallMessageWithDifferentInjectors($configContents, array $configNames, $expectedName): void
     {
         foreach ($configNames as $configName) {
             $this->createConfigFile($configName, $configContents);
@@ -1783,7 +1810,7 @@ CONTENT
         $this->installer->onPostPackageUninstall($event->reveal());
     }
 
-    public function testInstallWhitelistedDevModuleWithDifferentInjectors()
+    public function testInstallWhitelistedDevModuleWithDifferentInjectors(): void
     {
         $moduleConfigContent = <<<'CONFIG'
 <?php
@@ -1852,7 +1879,7 @@ CONFIG;
         $this->assertEquals(['Some\Component'], $modules);
     }
 
-    public function testInstallWhitelistedDevModuleWithUniqueInjector()
+    public function testInstallWhitelistedDevModuleWithUniqueInjector(): void
     {
         $moduleConfigContent = <<<'CONFIG'
 <?php
@@ -1941,8 +1968,10 @@ CONFIG;
      *
      * @param string $name
      * @param string $contents
+     *
+     * @return void
      */
-    private function createConfigFile($name, $contents)
+    private function createConfigFile($name, $contents): void
     {
         vfsStream::newFile('config/' . $name)
             ->at($this->projectRoot)

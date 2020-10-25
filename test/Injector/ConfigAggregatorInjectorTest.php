@@ -29,6 +29,8 @@ class ConfigAggregatorInjectorTest extends AbstractInjectorTestCase
 
     /**
      * @param false|string $contents
+     *
+     * @return false|null|string
      */
     public function convertToShortArraySyntax($contents)
     {
@@ -39,6 +41,11 @@ class ConfigAggregatorInjectorTest extends AbstractInjectorTestCase
         return preg_replace('/array\(([^)]+)\)/s', '[$1]', $contents);
     }
 
+    /**
+     * @return (bool|int)[][]
+     *
+     * @psalm-return array{config-provider: array{0: int, 1: true}, component: array{0: int, 1: false}, module: array{0: int, 1: false}}
+     */
     public function allowedTypes()
     {
         return [
@@ -48,6 +55,11 @@ class ConfigAggregatorInjectorTest extends AbstractInjectorTestCase
         ];
     }
 
+    /**
+     * @return (false|int|mixed|string)[][]
+     *
+     * @psalm-return array{fqcn-long-array: array{0: int, 1: false|string, 2: false|string}, global-long-array: array{0: int, 1: false|string, 2: false|string}, import-long-array: array{0: int, 1: false|string, 2: false|string}, import-long-array-alt-indent: array{0: int, 1: false|string, 2: false|string}, fqcn-short-array: array{0: int, 1: mixed, 2: mixed}, global-short-array: array{0: int, 1: mixed, 2: mixed}, import-short-array: array{0: int, 1: mixed, 2: mixed}, import-short-array-alt-indent: array{0: int, 1: mixed, 2: mixed}}
+     */
     public function injectComponentProvider()
     {
         // @codingStandardsIgnoreStart
@@ -84,6 +96,11 @@ class ConfigAggregatorInjectorTest extends AbstractInjectorTestCase
         // @codingStandardsIgnoreEnd
     }
 
+    /**
+     * @return (false|int|mixed|string)[][]
+     *
+     * @psalm-return array{fqcn-long-array: array{0: false|string, 1: int}, global-long-array: array{0: false|string, 1: int}, import-long-array: array{0: false|string, 1: int}, fqcn-short-array: array{0: mixed, 1: int}, global-short-array: array{0: mixed, 1: int}, import-short-array: array{0: mixed, 1: int}}
+     */
     public function packageAlreadyRegisteredProvider()
     {
         // @codingStandardsIgnoreStart
@@ -106,6 +123,11 @@ class ConfigAggregatorInjectorTest extends AbstractInjectorTestCase
         // @codingStandardsIgnoreEnd
     }
 
+    /**
+     * @return (false|mixed|string)[][]
+     *
+     * @psalm-return array{fqcn-long-array: array{0: false|string}, global-long-array: array{0: false|string}, import-long-array: array{0: false|string}, fqcn-short-array: array{0: mixed}, global-short-array: array{0: mixed}, import-short-array: array{0: mixed}}
+     */
     public function emptyConfiguration()
     {
         // @codingStandardsIgnoreStart
@@ -128,6 +150,11 @@ class ConfigAggregatorInjectorTest extends AbstractInjectorTestCase
         ];
     }
 
+    /**
+     * @return (false|mixed|string)[][]
+     *
+     * @psalm-return array{fqcn-long-array: array{0: false|string, 1: false|string}, global-long-array: array{0: false|string, 1: false|string}, import-long-array: array{0: false|string, 1: false|string}, import-long-array-alt-indent: array{0: false|string, 1: false|string}, fqcn-short-array: array{0: mixed, 1: mixed}, global-short-array: array{0: mixed, 1: mixed}, import-short-array: array{0: mixed, 1: mixed}, import-short-array-alt-indent: array{0: mixed, 1: mixed}}
+     */
     public function packagePopulatedInConfiguration()
     {
         // @codingStandardsIgnoreStart
@@ -164,7 +191,7 @@ class ConfigAggregatorInjectorTest extends AbstractInjectorTestCase
         // @codingStandardsIgnoreEnd
     }
 
-    public function testProperlyDetectsExistingConfigProviderInConfigWithMixedRelativeAndGloballyQualifiedNames()
+    public function testProperlyDetectsExistingConfigProviderInConfigWithMixedRelativeAndGloballyQualifiedNames(): void
     {
         $contents = file_get_contents(__DIR__ . '/TestAsset/mezzio-application-from-skeleton.config.php');
         vfsStream::newFile('config/config.php')

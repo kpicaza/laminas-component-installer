@@ -25,18 +25,25 @@ class NoopInjectorTest extends TestCase
      * @dataProvider packageTypes
      *
      * @param string $type
+     *
+     * @return void
      */
-    public function testWillRegisterAnyType($type)
+    public function testWillRegisterAnyType($type): void
     {
         $this->assertTrue($this->injector->registersType($type), 'NoopInjector does not register type ' . $type);
     }
 
-    public function testGetTypesAllowedReturnsNoTypes()
+    public function testGetTypesAllowedReturnsNoTypes(): void
     {
         $this->assertEquals([], $this->injector->getTypesAllowed());
     }
 
-    public function packageTypes()
+    /**
+     * @return int[][]
+     *
+     * @psalm-return array{config-provider: array{0: int}, component: array{0: int}, module: array{0: int}}
+     */
+    public function packageTypes(): array
     {
         return [
             'config-provider' => [NoopInjector::TYPE_CONFIG_PROVIDER],
@@ -49,15 +56,17 @@ class NoopInjectorTest extends TestCase
      * @dataProvider packageTypes
      *
      * @param string $type
+     *
+     * @return void
      */
-    public function testInjectIsANoop($type)
+    public function testInjectIsANoop($type): void
     {
         $injected = $this->injector->inject('Foo\Bar', $type);
 
         $this->assertFalse($injected);
     }
 
-    public function testRemoveIsANoop()
+    public function testRemoveIsANoop(): void
     {
         $removed = $this->injector->remove('Foo\Bar');
 
