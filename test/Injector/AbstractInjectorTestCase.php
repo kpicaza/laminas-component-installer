@@ -67,14 +67,17 @@ abstract class AbstractInjectorTestCase extends TestCase
     /**
      * @dataProvider injectComponentProvider
      *
-     * @param string $type
+     * @param int $type
      * @param string $initialContents
      * @param string $expectedContents
      *
      * @return void
      */
-    public function testInjectAddsPackageToModulesListInAppropriateLocation($type, $initialContents, $expectedContents): void
-    {
+    public function testInjectAddsPackageToModulesListInAppropriateLocation(
+        int $type,
+        string $initialContents,
+        string $expectedContents
+    ): void {
         vfsStream::newFile($this->configFile)
             ->at($this->configDir)
             ->setContent($initialContents);

@@ -24,8 +24,10 @@ use Laminas\ComponentInstaller\ComponentInstaller;
 use Laminas\ComponentInstaller\PackageProvider\PackageProviderDetectionFactory;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
+use PHPUnit\Framework\MockObject\Builder\InvocationMocker;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\Prophecy\MethodProphecy;
 use Prophecy\Prophecy\ObjectProphecy;
 use ReflectionObject;
 
@@ -221,13 +223,17 @@ CONTENT
             ->getRequires()
             ->willReturn([]);
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var InvocationMocker $answer1 */
+        $answer1 = $this->io->ask(Argument::that(function ($argument) {
             return ComponentInstallerTest::assertPrompt($argument, 'SomeComponent');
-        }), 1)->willReturn(1);
+        }), 1);
+        $answer1->willReturn(1);
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var InvocationMocker $answer2 */
+        $answer2 = $this->io->ask(Argument::that(function ($argument) {
             return ComponentInstallerTest::assertPrompt($argument);
-        }), 'y')->willReturn('y');
+        }), 'y');
+        $answer2->willReturn('y');
 
         $this->io->write(Argument::that(function ($argument) {
             return strstr($argument, 'Installing SomeComponent from package some/component');
@@ -240,13 +246,9 @@ CONTENT
         $this->assertNull($this->installer->onPostPackageInstall($event->reveal()));
     }
 
-    /**
-     * @return (string|string[])[][]
-     *
-     * @psalm-return array{one-dependency-on-top-psr-0: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string}, one-dependency-on-bottom-psr-0: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string}, no-dependencies-psr-0: array{0: string, 1: array{0: string}, 2: array<empty, empty>, 3: array{0: string, 1: string}, 4: string}, two-dependencies-psr-0: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string}, two-dependencies-in-reverse-order-psr-0: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string}, two-dependencies-with-more-packages-psr-0: array{0: string, 1: array{0: string, 1: string, 2: string, 3: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string, 4: string}, 4: string}, one-dependency-on-top-psr-4: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string}, one-dependency-on-bottom-psr-4: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string}, no-dependencies-psr-4: array{0: string, 1: array{0: string}, 2: array<empty, empty>, 3: array{0: string, 1: string}, 4: string}, two-dependencies-psr-4: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string}, two-dependencies-in-reverse-order-psr-4: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string}, two-dependencies-with-more-packages-psr-4: array{0: string, 1: array{0: string, 1: string, 2: string, 3: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string, 4: string}, 4: string}, one-dependency-on-top-classmap: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string, 5: string}, one-dependency-on-bottom-classmap: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string, 5: string}, no-dependencies-classmap: array{0: string, 1: array{0: string}, 2: array<empty, empty>, 3: array{0: string, 1: string}, 4: string, 5: string}, two-dependencies-classmap: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string, 5: string}, two-dependencies-in-reverse-order-classmap: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string, 5: string}, two-dependencies-with-more-packages-classmap: array{0: string, 1: array{0: string, 1: string, 2: string, 3: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string, 4: string}, 4: string, 5: string}, one-dependency-on-top-classmap-file: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string, 5: string}, one-dependency-on-bottom-classmap-file: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string, 5: string}, no-dependencies-classmap-file: array{0: string, 1: array{0: string}, 2: array<empty, empty>, 3: array{0: string, 1: string}, 4: string, 5: string}, two-dependencies-classmap-file: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string, 5: string}, two-dependencies-in-reverse-order-classmap-file: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string, 5: string}, two-dependencies-with-more-packages-classmap-file: array{0: string, 1: array{0: string, 1: string, 2: string, 3: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string, 4: string}, 4: string, 5: string}, one-dependency-on-top-files: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string}, one-dependency-on-bottom-files: array{0: string, 1: array{0: string, 1: string}, 2: array{0: string}, 3: array{0: string, 1: string, 2: string}, 4: string}, no-dependencies-files: array{0: string, 1: array{0: string}, 2: array<empty, empty>, 3: array{0: string, 1: string}, 4: string}, two-dependencies-files: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string}, two-dependencies-in-reverse-order-files: array{0: string, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string}, 4: string}, two-dependencies-with-more-packages-files: array{0: string, 1: array{0: string, 1: string, 2: string, 3: string}, 2: array{0: string, 1: string}, 3: array{0: string, 1: string, 2: string, 3: string, 4: string}, 4: string}}
-     */
     public function dependency(): array
     {
+        /** @psalm-suppress MixedInferredReturnType */
         return [
             // 'description' => [
             //   'package name to install',
@@ -498,12 +500,12 @@ CONTENT
      * @return void
      */
     public function testInjectModuleWithDependencies(
-        $packageName,
+        string $packageName,
         array $enabledModules,
         array $dependencies,
         array $result,
-        $autoloading,
-        $autoloadPath = null
+        string $autoloading,
+        ?string $autoloadPath = null
     ): void {
         $installPath = 'install/path';
         $modules = "\n        '" . implode("',\n        '", $enabledModules) . "',";
@@ -582,13 +584,17 @@ CONTENT
             ->getName()
             ->willReturn('some/component');
 
-        $this->io->ask(Argument::that(function ($argument) use ($packageName) {
+        /** @var InvocationMocker $answer1 */
+        $answer1 = $this->io->ask(Argument::that(function ($argument) use ($packageName) {
             return ComponentInstallerTest::assertPrompt($argument, $packageName);
-        }), 1)->willReturn(1);
+        }), 1);
+        $answer1->willReturn(1);
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var InvocationMocker $answer2 */
+        $answer2 = $this->io->ask(Argument::that(function ($argument) {
             return ComponentInstallerTest::assertPrompt($argument);
-        }), 'y')->willReturn('y');
+        }), 'y');
+        $answer2->willReturn('y');
 
         $this->io->write(Argument::that(function ($argument) use ($packageName) {
             return strstr($argument, sprintf('Installing %s from package some/component', $packageName));
@@ -602,9 +608,7 @@ CONTENT
     }
 
     /**
-     * @return string[][][]
-     *
-     * @psalm-return array{two-application-modules: array{0: array{0: string, 1: string}, 1: array{0: string, 1: string}, 2: array{0: string, 1: string, 2: string}}, with-some-component: array{0: array{0: string}, 1: array{0: string, 1: string}, 2: array{0: string, 1: string, 2: string}}, two-application-modules-with-some-component: array{0: array{0: string, 1: string}, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string, 2: string, 3: string}}, two-application-modules-with-some-component-another-order: array{0: array{0: string, 1: string}, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string, 2: string, 3: string}}, component-between-application-modules: array{0: array{0: string, 1: string}, 1: array{0: string, 1: string, 2: string}, 2: array{0: string, 1: string, 2: string, 3: string}}, no-application-modules: array{0: array<empty, empty>, 1: array{0: string}, 2: array{0: string, 1: string}}}
+     * @return array<array-key, array<array<string>>>
      */
     public function modules(): array
     {
@@ -650,14 +654,17 @@ CONTENT
     /**
      * @dataProvider modules
      *
-     * @param array $availableModules
-     * @param array $enabledModules
-     * @param array $result
+     * @param array<string> $availableModules
+     * @param array<string> $enabledModules
+     * @param array<string> $result
      *
      * @return void
      */
-    public function testModuleBeforeApplicationModules(array $availableModules, array $enabledModules, array $result): void
-    {
+    public function testModuleBeforeApplicationModules(
+        array $availableModules,
+        array $enabledModules,
+        array $result
+    ): void {
         $modulePath = vfsStream::newDirectory('module')->at($this->projectRoot);
         foreach ($availableModules as $module) {
             vfsStream::newDirectory($module)->at($modulePath);
@@ -691,13 +698,17 @@ CONTENT
         $this->rootPackage->getRequires()->willReturn([]);
         $this->rootPackage->getName()->willReturn('some/component');
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var InvocationMocker $answer1 */
+        $answer1 = $this->io->ask(Argument::that(function ($argument) {
             return ComponentInstallerTest::assertPrompt($argument, 'SomeModule');
-        }), 1)->willReturn(1);
+        }), 1);
+        $answer1->willReturn(1);
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var InvocationMocker $answer2 */
+        $answer2 = $this->io->ask(Argument::that(function ($argument) {
             return ComponentInstallerTest::assertPrompt($argument);
-        }), 'y')->willReturn('y');
+        }), 'y');
+        $answer2->willReturn('y');
 
         $this->io->write(Argument::that(function ($argument) {
             return strstr($argument, 'Installing SomeModule from package some/module');
@@ -802,7 +813,9 @@ CONTENT
         $this->rootPackage->getRequires()->willReturn([]);
         $this->rootPackage->getName()->willReturn('some/component');
 
-        $this->io->ask(Argument::any())->shouldNotBeCalled();
+        /** @var MethodProphecy $answer */
+        $answer = $this->io->ask(Argument::any());
+        $answer->shouldNotBeCalled();
 
         $this->assertNull($this->installer->onPostPackageInstall($event->reveal()));
         $config = file_get_contents(vfsStream::url('project/config/application.config.php'));
@@ -866,7 +879,8 @@ CONTENT
         $this->rootPackage->getRequires()->willReturn([]);
         $this->rootPackage->getName()->willReturn('some/component');
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var InvocationMocker $answer1 */
+        $answer1 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -887,9 +901,11 @@ CONTENT
             }
 
             return true;
-        }), 1)->willReturn(1);
+        }), 1);
+        $answer1->willReturn(1);
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var InvocationMocker $answer2 */
+        $answer2 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -898,7 +914,8 @@ CONTENT
             }
 
             return true;
-        }), 'y')->willReturn('y');
+        }), 'y');
+        $answer2->willReturn('y');
 
         $this->io->write(Argument::that(function ($argument) {
             return strstr($argument, 'Installing Some\Component from package some/component');
@@ -934,7 +951,8 @@ CONTENT
         $this->rootPackage->getRequires()->willReturn([]);
         $this->rootPackage->getName()->willReturn('some/component');
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var InvocationMocker $answer1 */
+        $answer1 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -955,9 +973,11 @@ CONTENT
             }
 
             return true;
-        }), 1)->willReturn(1);
+        }), 1);
+        $answer1->willReturn(1);
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var InvocationMocker $answer2 */
+        $answer2 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -978,7 +998,8 @@ CONTENT
             }
 
             return true;
-        }), 1)->willReturn(1);
+        }), 1);
+        $answer2->willReturn(1);
 
         $io = $this->io;
         $askValidator = function ($argument): bool {
@@ -991,14 +1012,14 @@ CONTENT
 
             return true;
         };
-        $io
-            ->ask(Argument::that($askValidator), 'y')
-            ->will(function () use ($io, $askValidator) {
-                $io
-                    ->ask(Argument::that($askValidator), 'y')
-                    ->willReturn('y');
-                return 'n';
-            });
+        /** @var MethodProphecy $answer3 */
+        $answer3 = $io->ask(Argument::that($askValidator), 'y');
+        $answer3->will(function () use ($io, $askValidator) {
+            /** @var InvocationMocker $answer */
+            $answer = $io->ask(Argument::that($askValidator), 'y');
+            $answer->willReturn('y');
+            return 'n';
+        });
 
         $io->write(Argument::that(function ($argument) {
             return strstr($argument, 'Installing Some\Component from package some/component');
@@ -1034,7 +1055,8 @@ CONTENT
         $event->getOperation()->willReturn($operation->reveal());
         $this->prepareEventForPackageProviderDetection($event, 'some/component');
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var MethodProphecy $answer1 */
+        $answer1 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -1055,9 +1077,11 @@ CONTENT
             }
 
             return true;
-        }), 1)->willReturn(1);
+        }), 1);
+        $answer1->willReturn(1);
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var MethodProphecy $answer2 */
+        $answer2 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -1066,7 +1090,8 @@ CONTENT
             }
 
             return true;
-        }), 'y')->willReturn('n');
+        }), 'y');
+        $answer2->willReturn('n');
 
         $this->io->write(Argument::that(function ($argument) {
             return strstr($argument, 'Installing Some\Component from package some/component');
@@ -1095,7 +1120,8 @@ CONTENT
         $this->rootPackage->getRequires()->willReturn([]);
         $this->rootPackage->getName()->willReturn('other/component');
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var MethodProphecy $answer3 */
+        $answer3 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -1116,9 +1142,11 @@ CONTENT
             }
 
             return true;
-        }), 1)->willReturn(1);
+        }), 1);
+        $answer3->willReturn(1);
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var MethodProphecy $answer4 */
+        $answer4 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -1127,7 +1155,8 @@ CONTENT
             }
 
             return true;
-        }), 'y')->willReturn('y');
+        }), 'y');
+        $answer4->willReturn('y');
 
         $this->io->write(Argument::that(function ($argument) {
             return strstr($argument, 'Installing Other\Component from package other/component');
@@ -1158,7 +1187,8 @@ CONTENT
         $event->getOperation()->willReturn($operation->reveal());
         $this->prepareEventForPackageProviderDetection($event, 'some/component');
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var MethodProphecy $answer1 */
+        $answer1 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -1179,9 +1209,11 @@ CONTENT
             }
 
             return true;
-        }), 1)->willReturn(1);
+        }), 1);
+        $answer1->willReturn(1);
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var MethodProphecy $answer2 */
+        $answer2 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -1190,7 +1222,8 @@ CONTENT
             }
 
             return true;
-        }), 'y')->willReturn('y')->shouldBeCalledTimes(1);
+        }), 'y');
+        $answer2->willReturn('y')->shouldBeCalledTimes(1);
 
         $this->io->write(Argument::that(function ($argument) {
             return strstr($argument, 'Installing Some\Component from package some/component');
@@ -1358,7 +1391,8 @@ CONTENT
         $this->rootPackage->getRequires()->willReturn([]);
         $this->rootPackage->getName()->willReturn('some/module');
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var MethodProphecy $answer1 */
+        $answer1 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -1379,9 +1413,11 @@ CONTENT
             }
 
             return true;
-        }), 1)->willReturn(1);
+        }), 1);
+        $answer1->willReturn(1);
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var MethodProphecy $answer2 */
+        $answer2 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -1390,7 +1426,8 @@ CONTENT
             }
 
             return true;
-        }), 'y')->willReturn('y');
+        }), 'y');
+        $answer2->willReturn('y');
 
         $this->io->write(Argument::that(function ($argument) {
             return strstr($argument, 'Installing Some\Module from package some/module');
@@ -1430,7 +1467,8 @@ CONTENT
         $this->rootPackage->getRequires()->willReturn([]);
         $this->rootPackage->getName()->willReturn('some/package');
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var MethodProphecy $answer1 */
+        $answer1 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -1451,9 +1489,11 @@ CONTENT
             }
 
             return true;
-        }), 1)->willReturn(1);
+        }), 1);
+        $answer1->willReturn(1);
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var MethodProphecy $answer2 */
+        $answer2 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -1474,9 +1514,11 @@ CONTENT
             }
 
             return true;
-        }), 1)->willReturn(1);
+        }), 1);
+        $answer2->willReturn(1);
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var MethodProphecy $answer3 */
+        $answer3 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -1485,7 +1527,8 @@ CONTENT
             }
 
             return true;
-        }), 'y')->willReturn('n');
+        }), 'y');
+        $answer3->willReturn('n');
 
         $this->io->write(Argument::that(function ($argument) {
             return strstr($argument, 'Installing Some\Module from package some/package');
@@ -1532,7 +1575,8 @@ CONTENT
             ->getName()
             ->willReturn('some/package');
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var MethodProphecy $answer1 */
+        $answer1 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -1553,9 +1597,11 @@ CONTENT
             }
 
             return true;
-        }), 1)->willReturn(1);
+        }), 1);
+        $answer1->willReturn(1);
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var MethodProphecy $answer2 */
+        $answer2 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -1576,9 +1622,11 @@ CONTENT
             }
 
             return true;
-        }), 1)->willReturn(1);
+        }), 1);
+        $answer2->willReturn(1);
 
-        $this->io->ask(Argument::that(function ($argument) {
+        /** @var MethodProphecy $answer3 */
+        $answer3 = $this->io->ask(Argument::that(function ($argument) {
             if (! is_string($argument)) {
                 return false;
             }
@@ -1587,7 +1635,8 @@ CONTENT
             }
 
             return true;
-        }), 'y')->willReturn('n');
+        }), 'y');
+        $answer3->willReturn('n');
 
         $this->io->write(Argument::that(function ($argument) {
             return strstr($argument, 'Installing Some\Module from package some/package');
@@ -1934,9 +1983,9 @@ CONFIG;
     }
 
     /**
-     * @return array
+     * @return array<array{string, array, string}>
      */
-    public function injectorConfigProvider()
+    public function injectorConfigProvider(): array
     {
         $config = <<<'CONFIG'
 <?php

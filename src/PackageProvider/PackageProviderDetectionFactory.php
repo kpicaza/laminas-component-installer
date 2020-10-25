@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Laminas\ComponentInstaller\PackageProvider;
 
 use Composer\Composer;
+use Composer\DependencyResolver\Pool;
 use Composer\Installer\PackageEvent;
 use Composer\IO\NullIO;
 use Composer\Plugin\PluginInterface;
@@ -20,6 +21,7 @@ use Composer\Repository\InstalledRepository;
 use Composer\Repository\PlatformRepository;
 use Composer\Repository\RepositoryFactory;
 use Composer\Repository\RootPackageRepository;
+use Laminas\ComponentInstaller\Exception\RuntimeException;
 use function version_compare;
 
 final class PackageProviderDetectionFactory
@@ -54,7 +56,12 @@ final class PackageProviderDetectionFactory
     public function detect(PackageEvent $event, string $packageName): PackageProviderDetectionInterface
     {
         if (self::isComposerV1()) {
-            return new ComposerV1($event->getPool());
+            /**
+             * @var Pool $pool
+             * @psalm-suppress UndefinedMethod
+             */
+            $pool = $event->getPool();
+            return new ComposerV1($pool);
         }
 
         $platformOverrides = $this->composer->getConfig()->get('platform') ?? [];

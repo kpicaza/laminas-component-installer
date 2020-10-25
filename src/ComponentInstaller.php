@@ -543,7 +543,7 @@ class ComponentInstaller implements
         $ask = ["\n  <question>Remember this option for other packages of the same type? (Y/n)</question>"];
 
         while (true) {
-            $answer = strtolower($this->io->ask(implode($ask), 'y'));
+            $answer = strtolower((string)$this->io->ask(implode($ask), 'y'));
 
             switch ($answer) {
                 case 'y':

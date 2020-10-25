@@ -5,9 +5,6 @@
       <code>is_array($items)</code>
       <code>null === $offset</code>
     </DocblockTypeContradiction>
-    <InvalidDocblock occurrences="1">
-      <code>public static function create($items)</code>
-    </InvalidDocblock>
     <MissingClosureParamType occurrences="9">
       <code>$filtered</code>
       <code>$filtered</code>
@@ -19,17 +16,10 @@
       <code>$key</code>
       <code>$results</code>
     </MissingClosureParamType>
-    <MissingParamType occurrences="1">
-      <code>$items</code>
-    </MissingParamType>
     <MissingPropertyType occurrences="1">
       <code>$items</code>
     </MissingPropertyType>
-    <MissingReturnType occurrences="1">
-      <code>create</code>
-    </MissingReturnType>
-    <MixedArgument occurrences="7">
-      <code>$items</code>
+    <MixedArgument occurrences="6">
       <code>$this-&gt;items</code>
       <code>$this-&gt;items</code>
       <code>$this-&gt;items</code>
@@ -124,11 +114,6 @@
       <code>function ($module) use ($options) {</code>
       <code>function ($modules, $configKey, $type) use ($extra, $supportedTypes) {</code>
     </MissingClosureReturnType>
-    <MissingReturnType occurrences="3">
-      <code>deactivate</code>
-      <code>promptToRememberOption</code>
-      <code>uninstall</code>
-    </MissingReturnType>
     <MixedArgument occurrences="22">
       <code>$ask</code>
       <code>$ask</code>
@@ -186,17 +171,14 @@
       <code>$supportedTypes</code>
       <code>$whitelist</code>
     </MixedAssignment>
-    <MixedInferredReturnType occurrences="5">
-      <code>Collection</code>
+    <MixedInferredReturnType occurrences="4">
       <code>Collection</code>
       <code>Collection</code>
       <code>Injector\InjectorInterface</code>
       <code>bool</code>
     </MixedInferredReturnType>
-    <MixedMethodCall occurrences="25">
+    <MixedMethodCall occurrences="21">
       <code>each</code>
-      <code>filter</code>
-      <code>filter</code>
       <code>getExtra</code>
       <code>getInjector</code>
       <code>getInjector</code>
@@ -211,8 +193,6 @@
       <code>isRegistered</code>
       <code>merge</code>
       <code>merge</code>
-      <code>reduce</code>
-      <code>reduce</code>
       <code>registersType</code>
       <code>setApplicationModules</code>
       <code>setModuleDependencies</code>
@@ -220,7 +200,7 @@
       <code>unique</code>
       <code>unique</code>
     </MixedMethodCall>
-    <MixedReturnStatement occurrences="6">
+    <MixedReturnStatement occurrences="5">
       <code>$options[1]-&gt;getInjector()</code>
       <code>isset($options[2]) ? $options[2]-&gt;getInjector() : $options[1]-&gt;getInjector()</code>
     </MixedReturnStatement>
@@ -240,10 +220,7 @@
     </UndefinedInterfaceMethod>
   </file>
   <file src="src/ConfigDiscovery.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>is_array($injectorClass)</code>
-    </DocblockTypeContradiction>
-    <InvalidPropertyAssignmentValue occurrences="2"/>
+    <InvalidPropertyAssignmentValue occurrences="1"/>
     <InvalidStringClass occurrences="1">
       <code>new $injectorClass($projectRoot)</code>
     </InvalidStringClass>
@@ -270,13 +247,8 @@
     <MixedArrayOffset occurrences="1">
       <code>$this-&gt;injectors[$file]</code>
     </MixedArrayOffset>
-    <MixedMethodCall occurrences="8">
-      <code>each</code>
-      <code>filter</code>
-      <code>filter</code>
+    <MixedMethodCall occurrences="3">
       <code>locate</code>
-      <code>map</code>
-      <code>map</code>
       <code>new $discoveryClass($projectRoot)</code>
       <code>registersType</code>
     </MixedMethodCall>
@@ -312,13 +284,8 @@
     <MissingClosureReturnType occurrences="1">
       <code>function ($discovery) {</code>
     </MissingClosureReturnType>
-    <MixedAssignment occurrences="1">
-      <code>$this-&gt;chain</code>
-    </MixedAssignment>
-    <MixedMethodCall occurrences="4">
-      <code>filter</code>
+    <MixedMethodCall occurrences="2">
       <code>locate</code>
-      <code>map</code>
       <code>new $discoveryClass($projectDirectory)</code>
     </MixedMethodCall>
   </file>
@@ -339,22 +306,19 @@
       <code>$this-&gt;injectionPatterns[self::TYPE_DEPENDENCY]['pattern']</code>
       <code>$this-&gt;injectionPatterns[self::TYPE_DEPENDENCY]['replacement']</code>
     </InvalidArrayOffset>
-    <MissingParamType occurrences="2">
+    <MissingParamType occurrences="1">
       <code>$config</code>
-      <code>$package</code>
     </MissingParamType>
     <MissingPropertyType occurrences="1">
       <code>$allowedTypes</code>
     </MissingPropertyType>
-    <MixedArgument occurrences="15">
+    <MixedArgument occurrences="13">
       <code>$config</code>
       <code>$config</code>
       <code>$dependency</code>
       <code>$dependency</code>
       <code>$module</code>
       <code>$module</code>
-      <code>$package</code>
-      <code>$package</code>
       <code>$pattern</code>
       <code>$this-&gt;allowedTypes</code>
       <code>$this-&gt;injectionPatterns[$type]['replacement']</code>
@@ -455,23 +419,19 @@
     <MixedArgument occurrences="1">
       <code>$file</code>
     </MixedArgument>
-    <MixedAssignment occurrences="3">
+    <MixedAssignment occurrences="2">
       <code>$allowedTypes</code>
       <code>$injector</code>
-      <code>$this-&gt;chain</code>
     </MixedAssignment>
     <MixedInferredReturnType occurrences="3">
       <code>getTypesAllowed</code>
       <code>inject</code>
       <code>remove</code>
     </MixedInferredReturnType>
-    <MixedMethodCall occurrences="9">
-      <code>filter</code>
-      <code>filter</code>
+    <MixedMethodCall occurrences="6">
       <code>getTypesAllowed</code>
       <code>inject</code>
       <code>isRegistered</code>
-      <code>map</code>
       <code>new $injector($projectRoot)</code>
       <code>registersType</code>
       <code>remove</code>
@@ -554,9 +514,6 @@
       <code>Argument::exact($package-&gt;reveal())</code>
       <code>Argument::that([$package, 'reveal'])</code>
     </InvalidArgument>
-    <InvalidReturnType occurrences="1">
-      <code>ObjectProphecy</code>
-    </InvalidReturnType>
     <InvalidScalarArgument occurrences="31">
       <code>1</code>
       <code>1</code>
@@ -573,12 +530,6 @@
       <code>1</code>
       <code>1</code>
     </InvalidScalarArgument>
-    <MismatchingDocblockParamType occurrences="1">
-      <code>ObjectProphecy|PackageEvent</code>
-    </MismatchingDocblockParamType>
-    <MismatchingDocblockReturnType occurrences="1">
-      <code>ObjectProphecy</code>
-    </MismatchingDocblockReturnType>
     <MissingClosureParamType occurrences="45">
       <code>$argument</code>
       <code>$argument</code>
@@ -626,60 +577,10 @@
       <code>$argument</code>
       <code>$argument</code>
     </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="7">
-      <code>function ($argument) use ($packageName) {</code>
-      <code>function ($argument) {</code>
-      <code>function ($argument) {</code>
-      <code>function ($argument) {</code>
-      <code>function ($argument) {</code>
-      <code>function ($argument) {</code>
-      <code>function ($argument) {</code>
-    </MissingClosureReturnType>
-    <MissingParamType occurrences="6">
+    <MissingParamType occurrences="1">
       <code>$argument</code>
-      <code>$contents</code>
-      <code>$contents</code>
-      <code>$packageName</code>
-      <code>$path</code>
-      <code>$path</code>
     </MissingParamType>
-    <MissingReturnType occurrences="34">
-      <code>assertPrompt</code>
-      <code>createApplicationConfig</code>
-      <code>createConfigFile</code>
-      <code>createModuleClass</code>
-      <code>dependency</code>
-      <code>moduleClass</code>
-      <code>modules</code>
-      <code>setUpModuleDependencies</code>
-      <code>testAppendModuleAndPrependComponent</code>
-      <code>testGetModuleClassesDependenciesHandlesAutoloadersWithMultiplePathsMappedToSameNamespace</code>
-      <code>testGetModuleDependenciesFromModuleClass</code>
-      <code>testInjectModuleWithDependencies</code>
-      <code>testInstallWhitelistedDevModuleWithDifferentInjectors</code>
-      <code>testInstallWhitelistedDevModuleWithUniqueInjector</code>
-      <code>testMissingDependency</code>
-      <code>testModuleBeforeApplicationModules</code>
-      <code>testModuleIsAppended</code>
-      <code>testMultipleInvocationsOfOnPostPackageInstallCanPromptMultipleTimes</code>
-      <code>testMultipleInvocationsOfOnPostPackageInstallCanReuseOptions</code>
-      <code>testOnPostPackageInstallDoesNotPromptForWhitelistedPackages</code>
-      <code>testOnPostPackageInstallDoesNotPromptIfPackageIsAlreadyInConfiguration</code>
-      <code>testOnPostPackageInstallPromptsForConfigOptions</code>
-      <code>testOnPostPackageInstallPromptsForConfigOptionsWhenDefinedAsArrays</code>
-      <code>testOnPostPackageInstallReturnsEarlyIfApplicationConfigIsMissing</code>
-      <code>testOnPostPackageInstallReturnsEarlyIfEventIsNotInDevMode</code>
-      <code>testOnPostPackageUninstallCanRemovePackageArraysFromConfiguration</code>
-      <code>testOnPostPackageUninstallRemovesPackageFromConfiguration</code>
-      <code>testOnPostPackageUninstallReturnsEarlyIfEventIsNotInDevMode</code>
-      <code>testOnPostPackageUninstallReturnsEarlyIfNoRelevantConfigFilesAreFound</code>
-      <code>testPostPackageInstallDoesNothingIfComposerExtraIsEmpty</code>
-      <code>testPostPackageInstallDoesNothingIfLaminasExtraSectionDoesNotContainComponentOrModule</code>
-      <code>testPrependComponentAndAppendModule</code>
-      <code>testSubscribesToExpectedEvents</code>
-      <code>testUninstallMessageWithDifferentInjectors</code>
-    </MissingReturnType>
-    <MixedArgument occurrences="30">
+    <MixedArgument occurrences="24">
       <code>$argument</code>
       <code>$argument</code>
       <code>$argument</code>
@@ -701,17 +602,11 @@
       <code>$argument</code>
       <code>$argument</code>
       <code>$configName</code>
-      <code>$contents</code>
-      <code>$contents</code>
       <code>$module</code>
-      <code>$packageName</code>
-      <code>$path</code>
-      <code>$path</code>
-      <code>$path</code>
       <code>$pathToModule</code>
       <code>RootPackageRepository::class</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="7">
+    <MixedArgumentTypeCoercion occurrences="1">
       <code>[$package, 'reveal']</code>
     </MixedArgumentTypeCoercion>
     <MixedArrayAccess occurrences="8">
@@ -724,7 +619,7 @@
       <code>$config['modules']</code>
       <code>$config['modules']</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="21">
+    <MixedAssignment occurrences="20">
       <code>$config</code>
       <code>$config</code>
       <code>$config</code>
@@ -734,7 +629,6 @@
       <code>$config</code>
       <code>$config</code>
       <code>$configName</code>
-      <code>$contents</code>
       <code>$dependencies</code>
       <code>$dependencies</code>
       <code>$module</code>
@@ -776,12 +670,6 @@
       <code>shouldBeCalled</code>
       <code>shouldBeCalled</code>
     </MixedMethodCall>
-    <MixedOperand occurrences="4">
-      <code>$path</code>
-      <code>$path</code>
-      <code>$path</code>
-      <code>$path</code>
-    </MixedOperand>
     <PossiblyInvalidMethodCall occurrences="72">
       <code>shouldNotBeCalled</code>
       <code>will</code>
@@ -881,86 +769,21 @@
       <code>include vfsStream::url('project/config/modules.config.php')</code>
     </UnresolvableInclude>
   </file>
-  <file src="test/ConfigDiscovery/ApplicationConfigTest.php">
-    <MissingReturnType occurrences="4">
-      <code>testAbsenceOfFileReturnsFalseOnLocate</code>
-      <code>testLocateReturnsFalseWhenFileDoesNotHaveExpectedContents</code>
-      <code>testLocateReturnsTrueWhenFileExistsAndHasExpectedContent</code>
-      <code>validApplicationConfigContents</code>
-    </MissingReturnType>
-  </file>
-  <file src="test/ConfigDiscovery/ConfigAggregatorTest.php">
-    <MissingReturnType occurrences="4">
-      <code>testAbsenceOfFileReturnsFalseOnLocate</code>
-      <code>testLocateReturnsFalseWhenFileDoesNotHaveExpectedContents</code>
-      <code>testLocateReturnsTrueWhenFileExistsAndHasExpectedContent</code>
-      <code>validMezzioConfigContents</code>
-    </MissingReturnType>
-  </file>
-  <file src="test/ConfigDiscovery/DevelopmentConfigTest.php">
-    <MissingReturnType occurrences="4">
-      <code>testAbsenceOfFileReturnsFalseOnLocate</code>
-      <code>testLocateReturnsFalseWhenFileDoesNotHaveExpectedContents</code>
-      <code>testLocateReturnsTrueWhenFileExistsAndHasExpectedContent</code>
-      <code>validDevelopmentConfigContents</code>
-    </MissingReturnType>
-  </file>
-  <file src="test/ConfigDiscovery/MezzioConfigTest.php">
-    <MissingReturnType occurrences="4">
-      <code>testAbsenceOfFileReturnsFalseOnLocate</code>
-      <code>testLocateReturnsFalseWhenFileDoesNotHaveExpectedContents</code>
-      <code>testLocateReturnsTrueWhenFileExistsAndHasExpectedContent</code>
-      <code>validMezzioConfigContents</code>
-    </MissingReturnType>
-  </file>
-  <file src="test/ConfigDiscovery/ModulesConfig.php">
-    <MissingReturnType occurrences="4">
-      <code>testAbsenceOfFileReturnsFalseOnLocate</code>
-      <code>testLocateReturnsFalseWhenFileDoesNotHaveExpectedContents</code>
-      <code>testLocateReturnsTrueWhenFileExistsAndHasExpectedContent</code>
-      <code>validModulesConfigContents</code>
-    </MissingReturnType>
-  </file>
   <file src="test/ConfigDiscoveryTest.php">
     <InvalidPropertyAssignmentValue occurrences="1">
       <code>new ConfigDiscovery()</code>
     </InvalidPropertyAssignmentValue>
-    <MissingParamType occurrences="3">
-      <code>$dist</code>
-      <code>$injectorType</code>
-      <code>$injectorType</code>
-    </MissingParamType>
-    <MissingReturnType occurrences="14">
-      <code>assertOptionsContainsInjector</code>
-      <code>assertOptionsContainsInjectorInChain</code>
-      <code>assertOptionsContainsNoopInjector</code>
-      <code>configFileSubset</code>
-      <code>createAggregatorConfig</code>
-      <code>createApplicationConfig</code>
-      <code>createDevelopmentConfig</code>
-      <code>createDevelopmentWorkConfig</code>
-      <code>createMezzioConfig</code>
-      <code>createModulesConfig</code>
-      <code>testGetAvailableConfigOptionsCanReturnsSubsetOfOptionsBaseOnPackageType</code>
-      <code>testGetAvailableConfigOptionsReturnsEmptyArrayWhenNoConfigFilesPresent</code>
-      <code>testGetAvailableConfigOptionsReturnsOptionsForEachSupportedPackageType</code>
-      <code>testNoOptionReturnedIfInjectorCannotRegisterType</code>
-    </MissingReturnType>
-    <MixedArgument occurrences="6">
-      <code>$injectorType</code>
-      <code>$injectorType</code>
+    <MixedArgument occurrences="4">
       <code>$options</code>
       <code>$options</code>
       <code>$options</code>
       <code>$options</code>
     </MixedArgument>
-    <MixedAssignment occurrences="3">
-      <code>$chain</code>
+    <MixedAssignment occurrences="2">
       <code>$options</code>
       <code>$options</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="2">
-      <code>getCollection</code>
+    <MixedMethodCall occurrences="1">
       <code>getInjector</code>
     </MixedMethodCall>
     <UndefinedDocblockClass occurrences="5">
@@ -978,137 +801,14 @@
       <code>$type</code>
     </InvalidScalarArgument>
     <InvalidStringClass occurrences="1"/>
-    <MissingReturnType occurrences="11">
+    <MissingReturnType occurrences="5">
       <code>allowedTypes</code>
       <code>emptyConfiguration</code>
       <code>injectComponentProvider</code>
       <code>packageAlreadyRegisteredProvider</code>
       <code>packagePopulatedInConfiguration</code>
-      <code>testGetTypesAllowedReturnsListOfAllExpectedTypes</code>
-      <code>testInjectAddsPackageToModulesListInAppropriateLocation</code>
-      <code>testInjectDoesNotModifyContentsIfPackageIsAlreadyRegistered</code>
-      <code>testRegistersTypesReturnsExpectedBooleanBasedOnType</code>
-      <code>testRemoveDoesNothingIfPackageIsNotInConfigFile</code>
-      <code>testRemoveRemovesPackageFromConfigurationWhenFound</code>
     </MissingReturnType>
     <PropertyTypeCoercion occurrences="1"/>
-  </file>
-  <file src="test/Injector/ApplicationConfigInjectorTest.php">
-    <MissingReturnType occurrences="5">
-      <code>allowedTypes</code>
-      <code>emptyConfiguration</code>
-      <code>injectComponentProvider</code>
-      <code>packageAlreadyRegisteredProvider</code>
-      <code>packagePopulatedInConfiguration</code>
-    </MissingReturnType>
-  </file>
-  <file src="test/Injector/ConfigAggregatorInjectorTest.php">
-    <MissingParamType occurrences="1">
-      <code>$contents</code>
-    </MissingParamType>
-    <MissingReturnType occurrences="7">
-      <code>allowedTypes</code>
-      <code>convertToShortArraySyntax</code>
-      <code>emptyConfiguration</code>
-      <code>injectComponentProvider</code>
-      <code>packageAlreadyRegisteredProvider</code>
-      <code>packagePopulatedInConfiguration</code>
-      <code>testProperlyDetectsExistingConfigProviderInConfigWithMixedRelativeAndGloballyQualifiedNames</code>
-    </MissingReturnType>
-    <MixedArgument occurrences="1">
-      <code>$contents</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="22">
-      <code>$baseContentsFqcnShortArray</code>
-      <code>$baseContentsFqcnShortArray</code>
-      <code>$baseContentsGloballyQualifiedShortArray</code>
-      <code>$baseContentsGloballyQualifiedShortArray</code>
-      <code>$baseContentsImportShortArray</code>
-      <code>$baseContentsImportShortArray</code>
-      <code>$baseContentsImportShortArrayAltIndent</code>
-      <code>$baseContentsImportShortArrayAltIndent</code>
-      <code>$expectedContentsFqcnShortArray</code>
-      <code>$expectedContentsFqcnShortArray</code>
-      <code>$expectedContentsGloballyQualifiedShortArray</code>
-      <code>$expectedContentsGloballyQualifiedShortArray</code>
-      <code>$expectedContentsImportShortArray</code>
-      <code>$expectedContentsImportShortArray</code>
-      <code>$expectedContentsImportShortArrayAltIndent</code>
-      <code>$expectedContentsImportShortArrayAltIndent</code>
-      <code>$fqcnShortArray</code>
-      <code>$fqcnShortArray</code>
-      <code>$globallyQualifiedShortArray</code>
-      <code>$globallyQualifiedShortArray</code>
-      <code>$importShortArray</code>
-      <code>$importShortArray</code>
-    </MixedAssignment>
-  </file>
-  <file src="test/Injector/DevelopmentConfigInjectorTest.php">
-    <MissingReturnType occurrences="5">
-      <code>allowedTypes</code>
-      <code>emptyConfiguration</code>
-      <code>injectComponentProvider</code>
-      <code>packageAlreadyRegisteredProvider</code>
-      <code>packagePopulatedInConfiguration</code>
-    </MissingReturnType>
-  </file>
-  <file src="test/Injector/MezzioConfigInjectorTest.php">
-    <MissingParamType occurrences="1">
-      <code>$contents</code>
-    </MissingParamType>
-    <MissingReturnType occurrences="6">
-      <code>allowedTypes</code>
-      <code>convertToShortArraySyntax</code>
-      <code>emptyConfiguration</code>
-      <code>injectComponentProvider</code>
-      <code>packageAlreadyRegisteredProvider</code>
-      <code>packagePopulatedInConfiguration</code>
-    </MissingReturnType>
-    <MixedArgument occurrences="1">
-      <code>$contents</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="18">
-      <code>$baseContentsFqcnShortArray</code>
-      <code>$baseContentsFqcnShortArray</code>
-      <code>$baseContentsGloballyQualifiedShortArray</code>
-      <code>$baseContentsGloballyQualifiedShortArray</code>
-      <code>$baseContentsImportShortArray</code>
-      <code>$baseContentsImportShortArray</code>
-      <code>$expectedContentsFqcnShortArray</code>
-      <code>$expectedContentsFqcnShortArray</code>
-      <code>$expectedContentsGloballyQualifiedShortArray</code>
-      <code>$expectedContentsGloballyQualifiedShortArray</code>
-      <code>$expectedContentsImportShortArray</code>
-      <code>$expectedContentsImportShortArray</code>
-      <code>$fqcnShortArray</code>
-      <code>$fqcnShortArray</code>
-      <code>$globallyQualifiedShortArray</code>
-      <code>$globallyQualifiedShortArray</code>
-      <code>$importShortArray</code>
-      <code>$importShortArray</code>
-    </MixedAssignment>
-  </file>
-  <file src="test/Injector/ModulesConfigInjectorTest.php">
-    <MissingReturnType occurrences="5">
-      <code>allowedTypes</code>
-      <code>emptyConfiguration</code>
-      <code>injectComponentProvider</code>
-      <code>packageAlreadyRegisteredProvider</code>
-      <code>packagePopulatedInConfiguration</code>
-    </MissingReturnType>
-  </file>
-  <file src="test/Injector/NoopInjectorTest.php">
-    <InvalidScalarArgument occurrences="2">
-      <code>$type</code>
-      <code>$type</code>
-    </InvalidScalarArgument>
-    <MissingReturnType occurrences="5">
-      <code>packageTypes</code>
-      <code>testGetTypesAllowedReturnsNoTypes</code>
-      <code>testInjectIsANoop</code>
-      <code>testRemoveIsANoop</code>
-      <code>testWillRegisterAnyType</code>
-    </MissingReturnType>
   </file>
   <file src="test/Injector/TestAsset/legacy-mezzio-application-fqcn.config.php">
     <MixedAssignment occurrences="1">

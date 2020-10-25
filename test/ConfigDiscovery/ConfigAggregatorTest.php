@@ -44,8 +44,6 @@ class ConfigAggregatorTest extends TestCase
 
     /**
      * @return string[][]
-     *
-     * @psalm-return array{fqcn-short-array: array{0: string}, globally-qualified-short-array: array{0: string}, imported-short-array: array{0: string}, fqcn-long-array: array{0: string}, globally-qualified-long-array: array{0: string}, imported-long-array: array{0: string}}
      */
     public function validMezzioConfigContents(): array
     {

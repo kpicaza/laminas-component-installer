@@ -103,6 +103,7 @@ class ConfigDiscoveryTest extends TestCase
     public function assertOptionsContainsNoopInjector(Collection $options): void
     {
         if ($options->isEmpty()) {
+            /** @psalm-suppress InternalClass */
             throw new ExpectationFailedException('Options array is empty; no NoopInjector found!');
         }
 
@@ -110,6 +111,7 @@ class ConfigDiscoveryTest extends TestCase
         $injector = array_shift($options)->getInjector();
 
         if (! $injector instanceof NoopInjector) {
+            /** @psalm-suppress InternalClass */
             throw new ExpectationFailedException('Options array does not contain a NoopInjector!');
         }
     }
@@ -118,6 +120,7 @@ class ConfigDiscoveryTest extends TestCase
     {
         foreach ($options as $option) {
             if (! $option instanceof ConfigOption) {
+                /** @psalm-suppress InternalClass */
                 throw new ExpectationFailedException(sprintf(
                     'Invalid option returned: %s',
                     is_object($option) ? get_class($option) : gettype($option)
@@ -129,6 +132,7 @@ class ConfigDiscoveryTest extends TestCase
             }
         }
 
+        /** @psalm-suppress InternalClass */
         throw new ExpectationFailedException(sprintf(
             'Injector of type %s was not found in the options',
             $injectorType
@@ -142,6 +146,7 @@ class ConfigDiscoveryTest extends TestCase
 
         foreach ($chain->getCollection() as $injector) {
             if (! $injector instanceof InjectorInterface) {
+                /** @psalm-suppress InternalClass */
                 throw new ExpectationFailedException(sprintf(
                     'Invalid Injector returned: %s',
                     is_object($injector) ? get_class($injector) : gettype($injector)
@@ -153,6 +158,7 @@ class ConfigDiscoveryTest extends TestCase
             }
         }
 
+        /** @psalm-suppress InternalClass */
         throw new ExpectationFailedException(sprintf(
             'Injector of type %s was not found in the options',
             $injectorType

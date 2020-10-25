@@ -16,7 +16,8 @@ use Composer\Repository\InstalledRepositoryInterface;
 final class ComposerV2 implements PackageProviderDetectionInterface
 {
     /**
-     * @var InstalledRepositoryInterface
+     * @psalm-suppress UndefinedDocblockClass
+     * @var InstalledRepository
      */
     private $installedRepository;
 
@@ -27,6 +28,7 @@ final class ComposerV2 implements PackageProviderDetectionInterface
 
     public function whatProvides(string $packageName): array
     {
+        /** @psalm-suppress UndefinedDocblockClass */
         return $this->installedRepository->findPackagesWithReplacersAndProviders($packageName);
     }
 }

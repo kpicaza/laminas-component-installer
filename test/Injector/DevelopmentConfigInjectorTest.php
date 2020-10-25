@@ -28,8 +28,6 @@ class DevelopmentConfigInjectorTest extends AbstractInjectorTestCase
 
     /**
      * @return (bool|int)[][]
-     *
-     * @psalm-return array{config-provider: array{0: int, 1: false}, component: array{0: int, 1: true}, module: array{0: int, 1: true}, dependency: array{0: int, 1: true}, before-application-modules: array{0: int, 1: true}}
      */
     public function allowedTypes()
     {
@@ -44,8 +42,6 @@ class DevelopmentConfigInjectorTest extends AbstractInjectorTestCase
 
     /**
      * @return (int|string)[][]
-     *
-     * @psalm-return array{component-long-array: array{0: int, 1: string, 2: string}, component-short-array: array{0: int, 1: string, 2: string}, module-long-array: array{0: int, 1: string, 2: string}, module-short-array: array{0: int, 1: string, 2: string}}
      */
     public function injectComponentProvider()
     {
@@ -63,8 +59,6 @@ class DevelopmentConfigInjectorTest extends AbstractInjectorTestCase
 
     /**
      * @return (int|string)[][]
-     *
-     * @psalm-return array{component-long-array: array{0: string, 1: int}, component-short-array: array{0: string, 1: int}, module-long-array: array{0: string, 1: int}, module-short-array: array{0: string, 1: int}}
      */
     public function packageAlreadyRegisteredProvider()
     {
@@ -80,8 +74,6 @@ class DevelopmentConfigInjectorTest extends AbstractInjectorTestCase
 
     /**
      * @return string[][]
-     *
-     * @psalm-return array{long-array: array{0: string}, short-array: array{0: string}}
      */
     public function emptyConfiguration()
     {
@@ -98,8 +90,6 @@ class DevelopmentConfigInjectorTest extends AbstractInjectorTestCase
 
     /**
      * @return string[][]
-     *
-     * @psalm-return array{long-array: array{0: string, 1: string}, short-array: array{0: string, 1: string}}
      */
     public function packagePopulatedInConfiguration()
     {

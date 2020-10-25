@@ -42,8 +42,6 @@ class MezzioConfigInjectorTest extends AbstractInjectorTestCase
 
     /**
      * @return (bool|int)[][]
-     *
-     * @psalm-return array{config-provider: array{0: int, 1: true}, component: array{0: int, 1: false}, module: array{0: int, 1: false}}
      */
     public function allowedTypes()
     {
@@ -56,8 +54,6 @@ class MezzioConfigInjectorTest extends AbstractInjectorTestCase
 
     /**
      * @return (false|int|mixed|string)[][]
-     *
-     * @psalm-return array{fqcn-long-array: array{0: int, 1: false|string, 2: false|string}, global-long-array: array{0: int, 1: false|string, 2: false|string}, import-long-array: array{0: int, 1: false|string, 2: false|string}, fqcn-short-array: array{0: int, 1: mixed, 2: mixed}, global-short-array: array{0: int, 1: mixed, 2: mixed}, import-short-array: array{0: int, 1: mixed, 2: mixed}}
      */
     public function injectComponentProvider()
     {
@@ -91,8 +87,6 @@ class MezzioConfigInjectorTest extends AbstractInjectorTestCase
 
     /**
      * @return (false|int|mixed|string)[][]
-     *
-     * @psalm-return array{fqcn-long-array: array{0: false|string, 1: int}, global-long-array: array{0: false|string, 1: int}, import-long-array: array{0: false|string, 1: int}, fqcn-short-array: array{0: mixed, 1: int}, global-short-array: array{0: mixed, 1: int}, import-short-array: array{0: mixed, 1: int}}
      */
     public function packageAlreadyRegisteredProvider()
     {
@@ -118,8 +112,6 @@ class MezzioConfigInjectorTest extends AbstractInjectorTestCase
 
     /**
      * @return (false|mixed|string)[][]
-     *
-     * @psalm-return array{fqcn-long-array: array{0: false|string}, global-long-array: array{0: false|string}, import-long-array: array{0: false|string}, fqcn-short-array: array{0: mixed}, global-short-array: array{0: mixed}, import-short-array: array{0: mixed}}
      */
     public function emptyConfiguration()
     {
@@ -145,8 +137,6 @@ class MezzioConfigInjectorTest extends AbstractInjectorTestCase
 
     /**
      * @return (false|mixed|string)[][]
-     *
-     * @psalm-return array{fqcn-long-array: array{0: false|string, 1: false|string}, global-long-array: array{0: false|string, 1: false|string}, import-long-array: array{0: false|string, 1: false|string}, fqcn-short-array: array{0: mixed, 1: mixed}, global-short-array: array{0: mixed, 1: mixed}, import-short-array: array{0: mixed, 1: mixed}}
      */
     public function packagePopulatedInConfiguration()
     {
